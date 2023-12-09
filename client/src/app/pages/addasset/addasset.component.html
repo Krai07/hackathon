@@ -1,0 +1,289 @@
+<div class="row">
+    <div class="col">
+        <div class="card card-user">
+            <div class="card-body">
+                <form class="col" [formGroup]="assetForm" (ngSubmit)="onSubmit()" autocomplete="off">
+                    <div class="row">
+                        <div class="col-md-4 pr-1">
+                            <h5 class="card-title">Asset Details</h5>
+                        </div>
+                        <div class="col-md-4 px-1">
+                        </div>
+                        <div class="col-md-4 pl-1">
+                            <div class="form-group">
+                                <select class="form-control" id="asset_category" name="asset_category"
+                                    formControlName="asset_category" required>
+                                    <option value="" selected>Choose Asset Category</option>
+                                    <option value="Laptop">Laptop</option>
+                                    <option value="Desktop">Desktop</option>
+                                    <option value="Charger">Charger</option>
+                                    <option value="Storage">HDD / SSD</option>
+                                    <option value="Wifi">Wifi Device</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 pr-1" *ngIf="assetForm.get('asset_category').value === 'Laptop' || 
+                                assetForm.get('asset_category').value === 'Desktop' || 
+                                assetForm.get('asset_category').value === 'Charger'">
+                            <div class="form-group">
+                                <label>Manufacturer</label>
+                                <select class="form-control" id="manufacturer" name="manufacturer"
+                                    formControlName="manufacturer" required>
+                                    <option value="" selected>Choose Manufacturer</option>
+                                    <option value="asus">Asus</option>
+                                    <option value="hp">HP</option>
+                                    <option value="dell">Dell</option>
+                                    <option value="lenovo">Lenovo</option>
+                                    <option value="apple">Apple</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 pr-1" *ngIf="assetForm.get('asset_category').value === 'Storage'">
+                            <div class="form-group">
+                                <label>Manufacturer</label>
+                                <input type="text" id="manufacturer" name="manufacturer" class="form-control"
+                                    formControlName="manufacturer" placeholder="Ex. Intel" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4 pr-1" *ngIf="assetForm.get('asset_category').value === 'Wifi'">
+                            <div class="form-group">
+                                <label>Manufacturer</label>
+                                <input type="text" id="manufacturer" name="manufacturer" class="form-control"
+                                    formControlName="manufacturer" placeholder="Ex. TP-Link" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4 px-1" *ngIf="assetForm.get('asset_category').value === 'Laptop' || 
+                                assetForm.get('asset_category').value === 'Desktop' || 
+                                assetForm.get('asset_category').value === 'Wifi' || 
+                                assetForm.get('asset_category').value === 'Storage' || 
+                                assetForm.get('asset_category').value === 'Charger'">
+                            <div class="form-group">
+                                <label>Product</label>
+                                <input type="text" id="product" name="product" formControlName="product"
+                                    class="form-control" placeholder="Product Name">
+                            </div>
+                        </div>
+                        <div class="col-md-4 pl-1" *ngIf="assetForm.get('asset_category').value === 'Laptop' || 
+                                assetForm.get('asset_category').value === 'Desktop' || 
+                                assetForm.get('asset_category').value === 'Wifi' || 
+                                assetForm.get('asset_category').value === 'Storage' || 
+                                assetForm.get('asset_category').value === 'Charger'">
+                            <div class="form-group">
+                                <label>Model</label>
+                                <input type="text" id="model" name="model" formControlName="model" class="form-control"
+                                    placeholder="Ex. B1402CBA-EK0111" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 pr-1" *ngIf="assetForm.get('asset_category').value === 'Laptop' || 
+                                assetForm.get('asset_category').value === 'Desktop' || 
+                                assetForm.get('asset_category').value === 'Wifi' || 
+                                assetForm.get('asset_category').value === 'Storage' || 
+                                assetForm.get('asset_category').value === 'Charger'">
+                            <div class="form-group">
+                                <label>Serial Number</label>
+                                <input type="text" id="serial_number" name="serial_number"
+                                    formControlName="serial_number" class="form-control"
+                                    placeholder="Ex. R2NXCV10K399083" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4 px-1" *ngIf="assetForm.get('asset_category').value === 'Charger'">
+                            <div class="form-group">
+                                <label>Power Watts</label>
+                                <input type="text" id="watts" name="watts" formControlName="watts" class="form-control"
+                                    placeholder="Ex. 65.0 W" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4 px-1" *ngIf="assetForm.get('asset_category').value === 'Storage'">
+                            <div class="form-group">
+                                <label>Storage</label>
+                                <input type="text" id="hdd_ssd" name="hdd_ssd" formControlName="hdd_ssd"
+                                    class="form-control" placeholder="Ex. 512GB SSD">
+                            </div>
+                        </div>
+                        <div class="col-md-4 px-1"
+                            *ngIf="assetForm.get('asset_category').value === 'Laptop' || assetForm.get('asset_category').value === 'Desktop'">
+                            <div class="form-group">
+                                <label>Ram</label>
+                                <input type="text" id="ram" name="ram" formControlName="ram" class="form-control"
+                                    placeholder="Ex. 8 GB" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4 pl-1"
+                            *ngIf="assetForm.get('asset_category').value === 'Laptop' || assetForm.get('asset_category').value === 'Desktop'">
+                            <div class="form-group">
+                                <label>Processor</label>
+                                <input type="text" id="processor" name="processor" formControlName="processor"
+                                    class="form-control" placeholder="Ex. Core i3-12Gen">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 pr-1"
+                            *ngIf="assetForm.get('asset_category').value === 'Laptop' || assetForm.get('asset_category').value === 'Desktop'">
+                            <div class="form-group">
+                                <label>Storage</label>
+                                <input type="text" id="hdd_ssd" name="hdd_ssd" formControlName="hdd_ssd"
+                                    class="form-control" placeholder="Ex. 512GB SSD">
+                            </div>
+                        </div>
+                        <div class="col-md-4 px-1"
+                            *ngIf="assetForm.get('asset_category').value === 'Laptop' || assetForm.get('asset_category').value === 'Desktop'">
+                            <div class="form-group">
+                                <label>Operating System</label>
+                                <select id="os" name="os" formControlName="os" class="form-control">
+                                    <option value="" selected>Choose OS</option>
+                                    <option value="without_os">WithOut Windows</option>
+                                    <option value="windows">Windows</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 pl-1" *ngIf="assetForm.get('os').value === 'windows'">
+                            <div class="form-group">
+                                <label>License Type</label>
+                                <input type="text" id="licence_type" name="licence_type" formControlName="licence_type"
+                                    class="form-control" placeholder="Ex. OEM / Mindcraft License">
+                            </div>
+                        </div>
+                    </div>
+                    <h5 class="card-title">Procurement Details</h5>
+                    <div class="row">
+                        <div class="col-md-4 pr-1">
+                            <div class="form-group">
+                                <label>Procurement Id</label>
+                                <input type="number" id="procurement_id" name="procurement_id" 
+                                formControlName="procurement_id" class="form-control" placeholder="Ex. 102" required
+                                (input)="onProcurementIdChange()">
+                            </div>
+                            <!-- (change)="onProcurementIdChange()" -->
+                        </div>
+                        <div class="col-md-4 px-1">
+                            <div class="form-group">
+                                <label>Procurement Date</label>
+                                <input type="date" class="form-control" [value]="assetForm.get('procurementDate').value" disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-4 pl-1">
+                            <div class="form-group">
+                                <label>Vendor Name</label>
+                                <input type="text" class="form-control" [value]="assetForm.get('vendorName').value" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 pr-1">
+                            <div class="form-group">
+                                <label>Support Date</label>
+                                <input type="date" id="end_of_support" name="end_of_support"
+                                    formControlName="end_of_support" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4 px-1">
+                            <div class="form-group">
+                                <label>Extended Support Years</label>
+                                <input type="number" id="end_of_extended_support_year" name="end_of_extended_support_year"
+                                    formControlName="end_of_extended_support_year" class="form-control"
+                                    placeholder="Ex. 3 Years">
+                            </div>
+                        </div>
+                    </div>
+                    <h5 class="card-title">Asset Status</h5>
+                    <div class="row">
+                        <div class="col-md-4 pr-1">
+                            <div class="form-group">
+                                <label>State</label>
+                                <select class="form-control" id="state" name="state" formControlName="state" required>
+                                    <option value="" selected>Choose State</option>
+                                    <option value="instock">In Stock</option>
+                                    <option value="inuse">In Use</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 px-1">
+                            <div class="form-group">
+                                <label>Sub State - Level 1</label>
+                                <select class="form-control" id="sub_state" name="sub_state"
+                                    formControlName="sub_state">
+                                    <option value="" selected>Select a sub state</option>
+                                    <option value="available" *ngIf="assetForm.get('state').value != 'inuse'">Available</option>
+                                    <option value="damaged" *ngIf="assetForm.get('state').value != 'inuse'">Damaged</option>
+                                    <option value="assigned" *ngIf="assetForm.get('state').value != 'instock'">Assigned</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 pl-1">
+                            <div class="form-group">
+                                <label>Sub State - Level 2</label>
+                                <select class="form-control" id="sub_state1" name="sub_state1"
+                                    formControlName="sub_state1">
+                                    <option value="" selected>Select a sub state</option>
+                                    <option value="working" *ngIf="assetForm.get('sub_state').value != 'damaged'">Working</option>
+                                    <option value="needrepair" *ngIf="assetForm.get('sub_state').value === 'damaged'">Need Repair</option>
+                                    <option value="scrapped" *ngIf="assetForm.get('sub_state').value === 'damaged'">Scrapped</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h5 class="card-title" *ngIf="assetForm.get('asset_category').value === 'Laptop' || assetForm.get('asset_category').value === 'Desktop'">Accessories</h5>
+                    
+                    <div class="row" *ngIf="assetForm.get('asset_category').value === 'Laptop' || assetForm.get('asset_category').value === 'Desktop'">
+                        <div class="col-md-3 pr-2">
+                            <div class="form-group">
+                                <label class="d-block">
+                                    <input type="checkbox" id="with_antivirus_yn" name="with_antivirus_yn"
+                                        formControlName="with_antivirus_yn" class="mr-2">
+                                    Antivirus
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 px-2">
+                            <div class="form-group">
+                                <label class="d-block">
+                                    <input type="checkbox" id="with_msoffice_yn" name="with_msoffice_yn"
+                                        formControlName="with_msoffice_yn" class="mr-2">
+                                    MS Office
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 px-2" *ngIf="assetForm.get('asset_category').value != 'Desktop'">
+                            <div class="form-group">
+                                <label class="d-block">
+                                    <input type="checkbox" id="with_charger_yn" name="with_charger_yn"
+                                        formControlName="with_charger_yn" class="mr-2">
+                                    Charger
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 pl-2" *ngIf="assetForm.get('asset_category').value != 'Desktop'">
+                            <div class="form-group">
+                                <label class="d-block">
+                                    <input type="checkbox" id="with_laptop_bag_yn" name="with_laptop_bag_yn"
+                                        formControlName="with_laptop_bag_yn" class="mr-2">
+                                    Laptop Bag
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-end align-items-end" style="margin-right: 20px;">
+                        <div class="col-md-2 pl-3">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button type="reset" class="btn btn-danger">Cancel</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="submit" class="btn btn-primary ml-2">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

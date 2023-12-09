@@ -1,0 +1,148 @@
+<div class="row">
+  <div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats" [ngClass]="{'inactive-border': !isBorderActive[0]}">
+      <div class="card-body ">
+
+        <div class="row" (click)="handleCardClick('total')">
+          <div class="col-5 col-md-4">
+            <div class="icon-big text-center icon-warning">
+              <i class="nc-icon nc-box-2"></i>
+            </div>
+          </div>
+          <div class="col-7 col-md-8">
+            <div class="numbers">
+              <p class="card-category">Total Assets</p>
+              <p class="card-title">{{totalAssetsCount}}
+              <p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-6 col-sm-6" *ngIf="AssignedAssetData">
+    <div class="card card-stats" [ngClass]="{'active-border': isBorderActive[1], 'inactive-border': !isBorderActive[1]}"
+      (click)="toggleBorder(1)">
+      <div class="card-body ">
+        <div class="row">
+          <div class="col-5 col-md-4">
+            <div class="icon-big text-center icon-warning">
+              <i class="nc-icon nc-laptop"></i>
+            </div>
+          </div>
+          <div class="col-7 col-md-8">
+            <div class="numbers">
+              <p class="card-category">Assigned</p>
+              <p class="card-title">{{totalAssignedAssets}}
+              <p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats" [ngClass]="{'active-border': isBorderActive[2], 'inactive-border': !isBorderActive[2]}"
+      (click)="toggleBorder(2)">
+      <div class="card-body ">
+        <div class="row">
+          <div class="col-5 col-md-4">
+            <div class="icon-big text-center icon-warning">
+              <i class="nc-icon nc-basket"></i>
+            </div>
+          </div>
+          <div class="col-7 col-md-8">
+            <div class="numbers">
+              <p class="card-category">Unassigned</p>
+              <p class="card-title">{{totalUnassignedAssets}}
+              <p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats" [ngClass]="{'active-border': isBorderActive[3], 'inactive-border': !isBorderActive[3]}"
+      (click)="toggleBorder(3)">
+      <div class="card-body ">
+        <div class="row">
+          <div class="col-5 col-md-4">
+            <div class="icon-big text-center icon-warning">
+              <i class="nc-icon nc-simple-remove"></i>
+            </div>
+          </div>
+          <div class="col-7 col-md-8">
+            <div class="numbers">
+              <p class="card-category">Damaged</p>
+              <p class="card-title">{{totalDamagedAssets}}
+              <p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header text-center"> <!-- Add text-center class to center the text -->
+      <h4 class="card-title">Available Assets</h4>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="checkbox1">
+        <label class="form-check-label" for="checkbox1">Checkbox 1</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="checkbox2">
+        <label class="form-check-label" for="checkbox2">Checkbox 2</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="checkbox3">
+        <label class="form-check-label" for="checkbox3">Checkbox 3</label>
+      </div>
+    </div>
+
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table">
+          <thead class="text-primary">
+            <th>
+              Asset Code
+            </th>
+            <th>
+              Category
+            </th>
+            <th>
+              Display Name
+            </th>
+            <th>
+              Serial no.
+            </th>
+            <th>
+              Status
+            </th>
+          </thead>
+          <tbody>
+            <tr *ngFor="
+                  let asset of displayData 
+                    | slice
+                      : (pagination.currentPage - 1) * pagination.pageSize
+                      : pagination.currentPage * pagination.pageSize
+                  ">
+              <td>{{asset.asset_code}}</td>
+              <td>{{asset.asset_category}}</td>
+              <td>{{asset.display_name}}</td>
+              <td>{{ asset.serial_number }}</td>
+              <td [ngStyle]="{'color': getStatusColor(asset.state)}">{{ asset.state }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <app-pagination #pagination [collectionSize]="displayData.length" [pageSize]="10" [firstLastButtons]="true"
+        [maxSize]="2"></app-pagination>
+    </div>
+  </div>
+</div>

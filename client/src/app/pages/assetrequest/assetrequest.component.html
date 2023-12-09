@@ -1,0 +1,70 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title">Asset Requests</h4>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive text-nowrap table-container">
+        <table class="table">
+          <thead class=" text-primary">
+            <th class="text-left">
+              Asset Category
+            </th>
+            <th class="text-center">
+              Employee ID
+            </th>
+            <th class="text-center">
+              Project Code
+            </th>
+            <th class="text-left">
+              Request Type
+            </th>
+            <th class="text-left">
+              Request Comments
+            </th>
+            <th class="text-center">
+              Approver ID
+            </th>
+            <th class="text-left">
+              Approver Comments
+            </th>
+            <th>
+              Assign Asset ID
+            </th>
+            <th>
+              Actions
+            </th>
+          <tbody>
+            <tr *ngFor="let request of assetRequestData
+            | slice
+                    : (pagination.currentPage - 1) * pagination.pageSize
+                    : pagination.currentPage * pagination.pageSize
+            ">
+              <td class="text-left">{{request.asset_category}}</td>
+              <td class="text-center">{{request.emp_id}}</td>
+              <td class="text-center">{{request.project_code}}</td>
+              <td class="text-left">{{request.request_type}}</td>
+              <td class="text-left">{{request.request_comments}}</td>
+              <td class="text-center">{{request.approver_id}}</td>
+              <td class="text-left">{{request.approver_comments}}</td>
+              <td>
+                <input type="text" class="form-control" [(ngModel)]="assetCode[request.asset_request_id]" required appAutocomplete placeholder="MC"/>
+              </td>
+              <td>
+                <div class="row">
+                  <div class="col-md-6">
+                    <button class="btn btn-primary" [disabled]="!assetCode[request.asset_request_id]"
+                      (click)="assignAsset(request)">
+                      Assign
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <app-pagination #pagination [collectionSize]="assetRequestData.length" [pageSize]="10" [firstLastButtons]="true" [maxSize]="2"></app-pagination>
+    </div>
+  </div>
+</div>

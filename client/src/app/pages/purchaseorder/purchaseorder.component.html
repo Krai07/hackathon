@@ -1,0 +1,114 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title">Purchase Orders</h4>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table">
+          <thead class=" text-primary">
+            <th>
+              Proc. ID.
+            </th>
+            <th class="text-left">
+              Asset Category
+            </th>
+            <th class="text-center">
+              Selected Vendor
+            </th>
+            <th class="text-center">
+              Procurement date
+            </th>
+            <th class="text-center">
+              Remaining Quantity
+            </th>
+            <th class="text-center">
+              Total Quantity
+            </th>
+            <th class="text-right">
+              Total value
+            </th>
+            <th class="text-right">
+              Actions
+            </th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let order of ProcurementData
+                          | slice
+                    : (pagination.currentPage - 1) * pagination.pageSize
+                    : pagination.currentPage * pagination.pageSize
+              ">
+              <td class="text-center">{{order.procurement_id}}</td>
+              <td class="text-left">{{order.asset_category}}</td>
+              <td class="text-center">{{order.selected_vendor}}</td>
+              <td class="text-center">{{order.procurement_date}}</td>
+              <td class="text-center">{{order.remaining_quantity}}</td>
+              <td class="text-center">{{order.quantity}}</td>
+              <td class="text-right">{{order.total_value}}</td>
+              <td class="text-center">
+                <a class="btn btn-info btn-link btn-icon btn-md plus pl-4" (click)="sendtoAsset(order)">
+                  <i class="fa fa-plus"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <app-pagination #pagination [collectionSize]="ProcurementData.length" [pageSize]="10" [firstLastButtons]="true"
+        [maxSize]="2"></app-pagination>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title">Purchase History</h4>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table">
+          <thead class=" text-primary">
+            <th>
+              Proc. ID.
+            </th>
+            <th class="text-left">
+              Asset Category
+            </th>
+            <th class="text-center">
+              Selected Vendor
+            </th>
+            <th class="text-center">
+              Quantity
+            </th>
+            <th>
+              Payment terms
+            </th>
+            <th class="text-center">
+              Procurement date
+            </th>
+            <th class="text-right">
+              Total value
+            </th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let order of ProcurementDataAdded
+                          | slice
+                    : (pagination.currentPage - 1) * pagination.pageSize
+                    : pagination.currentPage * pagination.pageSize
+              ">
+              <td class="text-center">{{order.procurement_id}}</td>
+              <td class="text-left">{{order.asset_category}}</td>
+              <td class="text-center">{{order.selected_vendor}}</td>
+              <td class="text-center">{{order.quantity}}</td>
+              <td>{{order.payment_terms}}</td>
+              <td class="text-center">{{order.procurement_date}}</td>
+              <td class="text-right">{{order.total_value}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <app-pagination #pagination [collectionSize]="ProcurementDataAdded.length" [pageSize]="10" [firstLastButtons]="true" [maxSize]="2"></app-pagination>
+    </div>
+  </div>
+</div>

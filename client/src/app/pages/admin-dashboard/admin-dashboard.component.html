@@ -1,0 +1,122 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title">Pending Delivery</h4>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table">
+          <thead class=" text-primary">
+            <th>
+              Asset Category
+            </th>
+            <th>
+              Employee ID
+            </th>
+            <th>
+              Project Code
+            </th>
+            <th>
+              Asset Tag
+            </th>
+            <th>
+              Delivery Location
+            </th>
+            <th>
+              Delivery Address
+            </th>
+            <th>
+              Delivery Comments
+            </th>
+            <th>
+              Actions
+            </th>
+          <tbody>
+            <tr *ngFor="let delivery of PendingDelivery
+              | slice
+                    : (pagination.currentPage - 1) * pagination.pageSize
+                    : pagination.currentPage * pagination.pageSize
+            ">
+              <td>{{delivery.asset_category}}</td>
+              <td>{{delivery.emp_id}}</td>
+              <td>{{delivery.project_code}}</td>
+              <td>{{delivery.asset_code}}</td>
+              <td>{{delivery.delivery_location}}</td>
+              <td>{{delivery.delivery_comments}}</td>
+              <td>
+                <input type="text" [(ngModel)]="comment[delivery.asset_request_id]" class="form-control" required />
+              </td>
+              <td>
+                <div class="row">
+                  <div class="col-md-6">
+                    <button type="submit" class="btn btn-primary" [disabled]="!comment[delivery.asset_request_id]"
+                      (click)="deliveryComments(delivery)">
+                      Delivered
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <app-pagination #pagination [collectionSize]="PendingDelivery.length" [pageSize]="10" [firstLastButtons]="true" [maxSize]="2" ></app-pagination>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title">Completed Delivery</h4>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table">
+          <thead class=" text-primary">
+            <th class="text-left">
+              Category
+            </th>
+            <th class="text-center">
+              Employee ID
+            </th>
+            <th class="text-center">
+              Project Code
+            </th>
+            <th class="text-center">
+              Asset Tag
+            </th>
+            <th class="text-center">
+              Delivery Location
+            </th>
+            <th class="text-center">
+              Delivery Address
+            </th>
+            <th class="text-center">
+              Status
+            </th>
+            <th class="text-right">
+              Delivery Comments
+            </th>
+          <tbody>
+            <tr *ngFor="let delivery of CompletedDelivery 
+              | slice
+                    : (pagination.currentPage - 1) * pagination.pageSize
+                    : pagination.currentPage * pagination.pageSize
+              ">
+              <td>{{delivery.asset_category}}</td>
+              <td class="text-center">{{delivery.emp_id}}</td>
+              <td class="text-center">{{delivery.project_code}}</td>
+              <td class="text-center">{{delivery.asset_code}}</td>
+              <td class="text-center">{{delivery.delivery_location}}</td>
+              <td class="text-center">{{delivery.delivery_comments}}</td>
+              <td [ngStyle]="{'color': getStatusColor(delivery.admin_status).color}">{{delivery.admin_status}}</td>
+              <td class="text-right">{{delivery.admin_comments}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <app-pagination #pagination [collectionSize]="CompletedDelivery.length" [pageSize]="10" [firstLastButtons]="true" [maxSize]="2"></app-pagination>
+    </div>
+  </div>
+</div>

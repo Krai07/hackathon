@@ -1,0 +1,98 @@
+<div class="row">
+    <div class="col">
+        <div class="card card-user">
+            <div class="card-header">
+                <h5 class="card-title">Asset Request Details</h5>
+            </div>
+            <div class="card-body">
+                <form class="col" [formGroup]="assetRequestForm" (ngSubmit)="onSubmit()" autocomplete="off">
+                    <div class="row">
+                        <div class="col-md-4 pr-1">
+                            <div class="form-group">
+                                <label>Asset Category</label>
+                                <select class="form-control" id ="asset_category" name="asset_category" formControlName="asset_category" required>
+                                    <option value="" selected>Choose Asset Category</option>
+                                    <option value="Laptop">Laptop</option>
+                                    <option value="Desktop">Desktop</option>
+                                    <option value="Charger">Charger</option>
+                                    <option value="Storage">HDD / SSD</option>
+                                    <option value="Wifi">Wifi Device</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 px-1">
+                            <div class="form-group">
+                                <label>Employee ID</label>
+                                <input type="number" id="emp_id" name="emp_id" formControlName="emp_id" class="form-control" required disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-4 pl-1">
+                            <div class="form-group">
+                                <label>Project Code</label>
+                                <input type="text" id="project_code" name="project_code" formControlName="project_code" class="form-control" placeholder="Ex. Project Code" required >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 pr-1">
+                            <div class="form-group">
+                                <label>Request Type</label>
+                                <select class="form-control" id="request_type" name="request_type" formControlName="request_type" required>
+                                    <option value="" selected>Choose Request Type</option>
+                                    <option value="NEW">New</option>
+                                    <option value="ONBEHALF" *ngIf="getRole()">Request On Behalf</option>
+                                    <option value="DAMAGED">Damaged</option>
+                                    <option value="LOST">Lost</option>
+                                    <option value="RETURN">Return</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 px-1">
+                            <div class="form-group">
+                                <label>Request Comments</label>
+                                <input type="text" id="request_comments" name="request_comments" formControlName="request_comments" class="form-control" placeholder="Ex. Request Comments" required >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 pr-1" *ngIf="assetRequestForm.get('request_type').value === 'NEW' || assetRequestForm.get('request_type').value === 'ONBEHALF'">
+                            <div class="form-group">
+                                <label>Delivery Location</label>
+                                <select class="form-control" formControlName="delivery_location" >
+                                    <option value="" selected>Choose Delivery Location</option>
+                                    <option value="Office">Office</option>
+                                    <option value="Home">Home</option>
+                                    <option value="Client">Client Location</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 px-1" *ngIf="assetRequestForm.get('request_type').value === 'NEW' || assetRequestForm.get('request_type').value === 'ONBEHALF'">
+                            <div class="form-group">
+                                <label>Delivery Address</label>
+                                <input type="text" id="delivery_comments" name="delivery_comments" formControlName="delivery_comments" class="form-control" placeholder="Ex. Delivery Address" >
+                            </div>
+                        </div>
+                    </div>
+                                    
+                    <div class="row justify-content-end align-items-end" style="margin-right: 20px;">
+                        <div class="col-md-2 pl-3">
+                          <div class="row">
+
+                            <div class="col-md-6">
+                                <button type="reset" class="btn btn-danger">Cancel</button>
+                            </div> 
+
+                            <div class="col-md-6" >
+                              <button type="submit" class="btn btn-primary ml-2">Save</button>
+                            </div>
+
+                          </div>
+
+                        </div>
+                      </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

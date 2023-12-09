@@ -1,0 +1,166 @@
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Asset Approvals</h4>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive text-nowrap table-container">
+                <table class="table">
+                    <thead class="text-primary">
+                        <th class="text-left">
+                            Asset Category
+                        </th>
+                        <th class="text-center">
+                            Employee ID
+                        </th>
+                        <th class="text-center">
+                            Project Code
+                        </th>
+                        <th class="text-left">
+                            Request Type
+                        </th>
+                        <th>
+                            Request Comments
+                        </th>
+                        <th class="text-center">
+                            Delivery Location
+                        </th>
+                        <th>
+                            Allocation Type
+                        </th>
+                        <th>
+                            Allocation Days
+                        </th>
+                        <th>
+                            Add Comments
+                        </th>
+                        <th>
+                            Actions
+                        </th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let approval of AssetApprovalManager
+                                    | slice
+                                : (pagination.currentPage - 1) * pagination.pageSize
+                                : pagination.currentPage * pagination.pageSize
+                            ">
+                            <td class="text-left">{{approval.asset_category}}</td>
+                            <td class="text-center">{{approval.emp_id}}</td>
+                            <td class="text-center">{{approval.project_code}}</td>
+                            <td class="text-left">{{approval.request_type}}</td>
+                            <td>{{approval.request_comments}}</td>
+                            <td class="text-center">{{approval.delivery_location}}</td>
+                            <td>
+                                <div class="form-group">
+                                    <select class="form-control"
+                                        [(ngModel)]="selectedAllocationType"
+                                        required>
+                                        <option value="" disabled selected>Choose Allocation Type</option>
+                                        <option value="Temporary">Temporary</option>
+                                        <option value="Permanent">Permanent</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <input type="number" class="form-control"
+                                        [(ngModel)]="days[approval.asset_request_id]" placeholder="Enter Days"
+                                        [disabled]="!(selectedAllocationType === 'Temporary')"
+                                        required />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+
+                                    <input type="text" class="form-control"
+                                        [(ngModel)]="comment[approval.asset_request_id]" placeholder="Enter Comments"
+                                        required />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <button class="btn btn-info btn-link btn-icon btn-md check pl-4"
+                                            [disabled]="!comment[approval.asset_request_id]"
+                                            (click)="acceptComment(approval)">
+                                            <i class="fa fa-check"></i>
+                                        </button>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button class="btn btn-danger btn-link btn-icon btn-md times pl-4"
+                                            [disabled]="!comment[approval.asset_request_id]"
+                                            (click)="rejectComment(approval)">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <app-pagination #pagination [collectionSize]="AssetApprovalManager.length" [pageSize]="10"
+                [firstLastButtons]="true" [maxSize]="2"></app-pagination>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Assets Approved</h4>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive text-nowrap table-container">
+                <table class="table">
+                    <thead class="text-primary">
+                        <th class="text-left">
+                            Asset Category
+                        </th>
+                        <th class="text-center">
+                            Employee ID
+                        </th>
+                        <th class="text-center">
+                            Project Code
+                        </th>
+                        <th class="text-left">
+                            Request Type
+                        </th>
+                        <th>
+                            Request Comments
+                        </th>
+                        <th class="text-center">
+                            Delivery Location
+                        </th>
+                        <th>
+                            Comments
+                        </th>
+                        <th class="text-right">
+                            Status
+                        </th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let approved of ApprovedAssetsManager
+                        | slice
+                    : (pagination.currentPage - 1) * pagination.pageSize
+                    : pagination.currentPage * pagination.pageSize
+            ">
+                            <td class="text-left">{{approved.asset_category}}</td>
+                            <td class="text-center">{{approved.emp_id}}</td>
+                            <td class="text-center">{{approved.project_code}}</td>
+                            <td class="text-left">{{approved.request_type}}</td>
+                            <td>{{approved.request_comments}}</td>
+                            <td class="text-center">{{approved.delivery_location}}</td>
+                            <td>{{approved.approver_comments}}</td>
+                            <td [ngStyle]="{'color': getStatusColor(approved.request_status).color}">{{approved.request_status}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <app-pagination #pagination [collectionSize]="ApprovedAssetsManager.length" [pageSize]="10"
+                [firstLastButtons]="true" [maxSize]="2"></app-pagination>
+        </div>
+    </div>
+</div>

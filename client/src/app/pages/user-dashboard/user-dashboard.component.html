@@ -1,0 +1,202 @@
+<div class="row">
+
+  <div *ngFor="let deliveringAsset of deliveringAssets; let i = index" class="col-lg-5 col-md-6 col-sm-6">
+    <div class="card card-stats custom-card" ng-style="cardStyle">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-5 col-md-4">
+            <div class="icon-big text-center icon-warning">
+              <i class="nc-icon nc-laptop"></i>
+            </div>
+          </div>
+          <div class="col-7 col-md-8">
+            <div class="numbers">
+              <p class="card-category">Delivery</p>
+              <p class="card-title">{{deliveringAsset.asset_code}}</p>
+            </div>
+          </div>
+        </div>
+        <mat-accordion>
+          <mat-expansion-panel hideToggle>
+          </mat-expansion-panel>
+          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <p class="card-category medium" style="margin-bottom: 30px;"><b>Asset Request Details</b></p>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p><b>Request ID : </b> {{deliveringAsset.asset_request_id}} </p>
+            <p><b>Category : </b> {{deliveringAsset.asset_category}} </p>
+            <div class="row">
+              <div class="col-md-12">
+                <button type="button" class="btn btn-primary" (click)="confirmAllocation(deliveringAssets, i)">
+                  Confirm Asset Allocation
+                </button>
+              </div>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+    </div>
+  </div>
+  <div *ngFor="let asset of userAssets" class="col-lg-4 col-md-6 col-sm-6">
+    <div class="card card-stats custom-card" ng-style="cardStyle">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-5 col-md-4">
+            <div class="icon-big text-center icon-warning">
+              <i class="nc-icon nc-laptop"></i>
+              <b><p class="card-title" style="font-size: 15px;">{{asset.asset_code}}</p></b>
+            </div>
+          </div>
+          <div class="col-7 col-md-8">
+            <br>
+            <div class="numbers">
+              <p class="card-category">Assigned</p>
+              <p class="card-category">{{asset.assigned_on | date}}</p>
+              <p class="card-category">Permanent</p>
+            </div>
+          </div>
+        </div>
+        <!-- <mat-accordion>
+          <mat-expansion-panel hideToggle>
+          </mat-expansion-panel>
+          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <p class="card-category medium" style="margin-bottom: 30px;"></p>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p><b>Category: </b> {{asset.asset_category}} </p>
+            <p><b>Serial number: </b> {{asset.serial_number}} </p>
+            <p><b>Display name: </b>{{asset.display_name}} </p>
+            <p *ngIf="asset.licence_type"><b>License type: </b> {{asset.licence_type}} </p>
+            <p *ngIf="asset.processor"><b>Processor: </b> {{asset.processor}} </p>
+            <p *ngIf="asset.os"><b>Operating System: </b> {{asset.os}} </p>
+            <p *ngIf="asset.ram"><b>RAM: </b> {{asset.ram}} </p>
+            <p *ngIf="asset.hdd_ssd"><b>HDD/SSD: </b> {{asset.hdd_ssd}} </p>
+            <p *ngIf="asset.watts"><b>Watts: </b> {{asset.watts}}</p>
+          </mat-expansion-panel>
+        </mat-accordion> -->
+      </div>
+    </div>
+  </div>
+<!-- New hardcoded permanent card -->
+<div class="col-lg-4 col-md-6 col-sm-6">
+  <div class="card card-stats custom-card" ng-style="cardStyle">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-5 col-md-4">
+          <div class="icon-big text-center icon-warning">
+            <i class="nc-icon nc-laptop"></i>
+            <b><p class="card-title" style="font-size: 16px;">MCL001</p></b>
+          </div>
+        </div>
+        <br>
+        <div class="col-7 col-md-8">
+          <br>
+          <div class="numbers">
+            <p class="card-category">Assigned</p>
+            <p class="card-category">07/12/2023</p>
+            <p class="card-category">Permanent</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- temporary asset card-->
+<div class="col-lg-4 col-md-6 col-sm-6">
+  <div class="card card-stats custom-card" ng-style="cardStyle">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-5 col-md-4">
+          <div class="icon-big text-center icon-warning">
+            <i class="nc-icon nc-laptop"></i>
+            <b><p class="card-title" style="font-size: 16px;">MCL001</p></b>
+          </div>
+        </div>
+        <br>
+        <div class="col-7 col-md-8">
+          <br>
+          <div class="numbers">
+            <p class="card-category">Assigned</p>
+            <p class="card-category">07/12/2023</p>
+            <p class="card-category">15 Days Remaining</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-lg-4 col-md-6 col-sm-6">
+  <div class="card card-stats custom-card" ng-style="cardStyle">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-5 col-md-4">
+          <div class="icon-big text-center icon-warning">
+            <i class="nc-icon nc-laptop"></i>
+            <b><p class="card-title" style="font-size: 16px;">MCL001</p></b>
+          </div>
+        </div>
+        <br>
+        <div class="col-7 col-md-8">
+          <br>
+          <div class="numbers">
+            <p class="card-category">Assigned</p>
+            <p class="card-category">07/12/2023</p>
+            <p class="card-category">15 Days Remaining</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title">Asset Request Status</h4>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table">
+          <thead class="text-center text-primary">
+            <th>
+              Request Id
+            </th>
+            <th>
+              Asset Category
+            </th>
+            <th>
+              Project Code
+            </th>
+            <th>
+              Request Type
+            </th>
+            <th>
+              Approval Status
+            </th>
+          <tbody>
+            <tr *ngFor="let request of assetRequestData
+              | slice
+                    : (pagination.currentPage - 1) * pagination.pageSize
+                    : pagination.currentPage * pagination.pageSize
+              " class="text-center">
+              <td>{{request.asset_request_id}}</td>
+              <td>{{request.asset_category}}</td>
+              <td>{{request.project_code}}</td>
+              <td>{{request.request_type}}</td>
+              <td [ngStyle]="{'color': getStatusColor(request.request_status).color}">{{request.request_status}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <app-pagination #pagination [collectionSize]="assetRequestData.length" [pageSize]="10" [firstLastButtons]="true" [maxSize]="2"></app-pagination>
+    </div>
+  </div>
+</div>

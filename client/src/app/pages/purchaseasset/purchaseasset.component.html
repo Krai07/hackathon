@@ -1,0 +1,142 @@
+<div class="row">
+  <div class="col">
+    <div class="card card-user">
+      <div class="card-header">
+        <h5 class="card-title">Purchase Asset</h5>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="assetform" (ngSubmit)="onSubmit()" class="col">
+          <div class="row">
+            <div class="col-md-4 pr-1">
+              <div class="form-group">
+                <label>Procurement Date</label>
+                <input type="date" id="procurement_date" name="procurement_date" formControlName="procurement_date"
+                  class="form-control" required>
+              </div>
+            </div>
+            <div class="col-md-4 px-1">
+              <div class="form-group">
+                <label>Asset Category</label>
+                <select class="form-control" id="asset_category" name="asset_category" formControlName="asset_category" required>
+                  <option value="" selected>Select a category</option>
+                  <option value="Laptop">Laptop</option>
+                  <option value="Desktop">Desktop</option>
+                  <option value="Charger">Charger</option>
+                  <option value="Storage">HDD / SSD</option>
+                  <option value="Wifi">Wifi Device</option>
+                </select>
+                <!-- <input type="text" class="form-control" placeholder="Laptop / Hard Drive" required> -->
+              </div>
+            </div>
+            <div class="col-md-4 pl-1">
+              <div class="form-group">
+                <label>Quantity</label>
+                <input type="number" id="quantity" name="quantity" formControlName="quantity" class="form-control"
+                  placeholder="Number of units" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 pr-1">
+              <div class="form-group">
+                <label>Vendor Name</label>
+                <input type="text" id="selected_vendor" name="selected_vendor" formControlName="selected_vendor"
+                  class="form-control" placeholder="Ex. ABC Co." required>
+              </div>
+            </div>
+            <div class="col-md-8 pl-1">
+              <div class="form-group">
+                <label>Procurement Description</label>
+                <input type="text" id="procurement_desc" name="procurement_desc" formControlName="procurement_desc"
+                  class="form-control" placeholder="Ex. Describe about the Procurement in Detail" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 pr-1">
+              <div class="form-group">
+                <label>Total Cost</label>
+                <input type="number" id="total_value" name="total_value" formControlName="total_value"
+                  class="form-control" placeholder="Ex. 23450.00" required>
+              </div>
+            </div>
+            <div class="col-md-4 px-1">
+              <div class="form-group">
+                <label>Payment Terms</label>
+                <input type="text" id="payment_terms" name="payment_terms" formControlName="payment_terms"
+                  class="form-control" placeholder="30 Days / Advance" required>
+              </div>
+            </div>
+            <div class="col-md-4 pl-1">
+              <div class="form-group">
+                <label>Comments</label>
+                <input type="text" id="payment_terms_comments" name="payment_terms_comments"
+                  formControlName="payment_terms_comments" class="form-control" placeholder="Payment Comments">
+              </div>
+            </div>
+          </div>
+          <h5 class="card-title">Raised Details</h5>
+          <div class="row">
+            <div class="col-md-4 pr-1">
+              <div class="form-group">
+                <label>Raised By</label>
+                <input type="number" id="raised_by_id" name="raised_by_id" formControlName="raised_by_id"
+                  class="form-control" placeholder="Ex. Raised By ID" disabled required>
+              </div>
+            </div>
+            <div class="col-md-4 px-1">
+              <div class="form-group">
+                <label>Raised Date</label>
+                <input type="date" id="raised_date" name="raised_date" formControlName="raised_date"
+                  class="form-control" placeholder="" required>
+              </div>
+            </div>
+            <div class="col-md-4 pl-1">
+              <div class="form-group">
+                <label>Comments</label>
+                <input type="text" id="raised_comments" name="raised_comments" formControlName="raised_comments"
+                  class="form-control" placeholder="Raised Comments">
+              </div>
+            </div>
+          </div>
+          <h5 class="card-title">Approval Details</h5>
+          <div class="row">
+            <div class="col-md-4 pr-1">
+              <div class="form-group">
+                <label>Approver's ID</label>
+                <input type="number" id="approved_by_id" name="approved_by_id" formControlName="approved_by_id"
+                  class="form-control" placeholder="Ex. Approver's ID" required>
+              </div>
+            </div>
+            <div class="col-md-4 px-1">
+              <div class="form-group">
+                <label>Approval Date</label>
+                <input type="date" id="approved_date" name="approved_date" formControlName="approved_date"
+                  class="form-control" placeholder="" required>
+              </div>
+            </div>
+            <div class="col-md-4 pl-1">
+              <div class="form-group">
+                <label>Comments</label>
+                <input type="text" id="approved_comments" name="approved_comments" formControlName="approved_comments"
+                  class="form-control" placeholder="Approval Comments">
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-end align-items-end">
+            <div class="col-md-2 pl-3">
+              <div class="row">
+                <div class="col-md-6">
+                  <button type="reset" class="btn btn-danger">Cancel</button>
+                </div>
+                <div class="col-md-6">
+                  <button type="button" class="btn btn-primary ml-2" (click)="onSubmit()">Save</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

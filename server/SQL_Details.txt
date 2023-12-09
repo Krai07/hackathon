@@ -1,0 +1,21 @@
+asset.sql 				:: 
+- Contains tables and their sequences
+
+	- users
+	- procurement
+	- procurement_documents
+	- m_assets
+	- asset_request
+
+asset_function.sql 		::
+	
+	- generate_asset_code		[Generates Asset Code]
+	- generate_display_name		[Generates Display Name]
+
+asset_view.sql 			::
+
+	- asset_status_view  		[Available Assets - System Admin Home Screen]
+	- procurement_view   		[Procurement View - Purchase Orders (System Admin)]
+	- asset_request_view 		[Asset Request View - Within Employee View, it shows asset request status]
+	- asset_info_view	   		[Assigned Assets - (Employee | Manager) To list all the assigned assets.]
+	- asset_approval_manager	[Approval at Managers View]
